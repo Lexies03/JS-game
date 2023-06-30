@@ -1,0 +1,454 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #17223B;
+}
+
+canvas {
+    background: url('Assets/img-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+    margin: 0 auto;
+}
+
+.header-container h1 {
+    display: block;
+    font-family: 'Quantico', sans-serif;
+    font-weight: bolder;
+    font-size: 8rem;
+    text-align: center;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+    font-family: 'Quantico', sans-serif;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 50%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 40px;
+    color: white;
+    background: url('Assets/img-background2.jpg');
+    background-size:cover;
+}
+
+.header-content {
+    font-size: 4rem;
+}
+
+.btn-main {
+    background-color: #17223B;
+    font-size: 2rem;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-play {
+    width: 50%;
+    height: auto;
+    font-size: 3rem;
+    font-family: 'Bungee', cursive;
+    border: 1px solid black;
+    padding: 0px;
+    background-color: #E94560;
+    border-radius: 20%;
+    cursor: pointer;
+    color: white;
+
+}
+
+.link-btn-play {
+    width: 200px;
+    text-decoration: none;
+
+}
+
+#name {
+    font-family: 'Quantico', sans-serif;
+    font-size: 2rem;
+    color: #E94560;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.instruction-container img {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+}
+
+/* Labels */
+.labels-container {
+    display: none;
+    background-color: #E94560;
+    font-size: 2rem;
+    font-family: 'Quantico', sans-serif;
+    color: black;
+}
+
+.lblContainer {
+    display: flex;
+}
+
+.game-right {
+    position: absolute;
+    right: 0;
+    margin-right: 200px;
+}
+
+.game-left {
+    position: absolute;
+    left: 0;
+    margin-left: 100px;
+}
+
+.timer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Side Buttons Inside the game*/
+.side-buttons-container {
+    display: none;
+    position: absolute;
+    right: 0;
+    color: white;
+}
+
+.side-buttons {
+    list-style: none;
+}
+
+.side-buttons img {
+    object-fit: contain;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-side {
+    background: none;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-side:hover {
+    background-color: #0F3460;
+    cursor: pointer;
+}
+
+.btn-side-speakerOff {
+    display: none;
+}
+
+/* PopUp Quit*/
+.popUp-container {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    background: url('Assets/img-popUp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: 'Quantico', sans-serif;
+    border-radius: 20px;
+    padding: 10px;
+    width: 600px;
+    height: 320px;
+}
+
+.lbl-quit {
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: black;
+}
+
+.quit-container {
+    display: none;
+}
+
+.btn-quit-container button {
+    width: 20%;
+    height: 40px;
+    font-size: 2rem;
+    border-radius: 10px;
+    border: 3px solid #17223B;
+}
+
+.btn-quit-yes {
+    background-color: red;
+    color: white;
+}
+
+.btn-quit-no {
+    background-color: #0F3460;
+    color: white;
+}
+
+.btn-quit-yes:hover {
+    background: none;
+    border: 3px solid red;
+    color: #17223B;
+    cursor: pointer;
+}
+
+.btn-quit-no:hover {
+    background: none;
+    border: 3px solid #17223B;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-quit-no:hover {
+    background: none;
+    border: 3px solid #0F3460;
+    color: #0F3460;
+    cursor: pointer;
+}
+
+/* PopUp Restart */
+.restart-container {
+    display: none;
+}
+
+.lbl-restart {
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: black;
+}
+
+.btn-restart-container button {
+    width: 20%;
+    height: 40px;
+    font-size: 2rem;
+    border-radius: 10px;
+    border: 3px solid #17223B;
+}
+
+.btn-restart-yes {
+    background-color: green;
+    color: white;
+}
+
+.btn-restart-no {
+    background-color: #0F3460;
+    color: white;
+}
+
+.btn-restart-yes:hover {
+    background: none;
+    border: 3px solid red;
+    color: #17223B;
+    cursor: pointer;
+}
+
+.btn-restart-no:hover {
+    background: none;
+    border: 3px solid #17223B;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-restart-no:hover {
+    background: none;
+    border: 3px solid #0F3460;
+    color: #0F3460;
+    cursor: pointer;
+}
+
+/* PopUp GameOver */
+.gameOver-container {
+    display: none;
+}
+
+.lbl-gameOver {
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: black;
+}
+
+.lbl-gameOver-score {
+    font-size: 3rem;
+    font-weight: lighter;
+    color: black;
+}
+
+.lbl-gameOver-scoreValue {
+    font-size: 3rem;
+    font-weight: lighter;
+    color: black;
+}
+
+.btn-gameOver-container button {
+    width: 150px;
+    height: 50px;
+    font-size: 2rem;
+    border-radius: 10px;
+    border: 3px solid #17223B;
+    margin: 5px;
+}
+
+.btn-gameOver-yes {
+    background-color: #E94560;
+    color: white;
+}
+
+.btn-gameOver-no {
+    background-color: #0F3460;
+    color: white;
+}
+
+.btn-gameOver-yes:hover {
+    background: none;
+    border: 3px solid #E94560;
+    color: #E94560;
+    cursor: pointer;
+}
+
+.btn-gameOver-no:hover {
+    background: none;
+    border: 3px solid #17223B;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-gameOver-no:hover {
+    background: none;
+    border: 3px solid #0F3460;
+    color: #0F3460;
+    cursor: pointer;
+}
+
+.btn-gameOver-back:hover {
+    background: none;
+    border: 3px solid red;
+    color: black;
+    cursor: pointer;
+}
+
+/* PopUp Winner */
+.winner-container {
+    display: none;
+}
+
+.lbl-winner {
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: black;
+}
+
+.lbl-winner-score {
+    font-size: 3rem;
+    font-weight: lighter;
+    color: black;
+}
+
+.lbl-winner-scoreValue {
+    font-size: 3rem;
+    font-weight: lighter;
+    color: black;
+}
+
+.btn-winner-container button {
+    width: 150px;
+    height: 50px;
+    font-size: 2rem;
+    border-radius: 10px;
+    border: 3px solid #17223B;
+    margin: 5px;
+}
+
+.btn-winner-yes {
+    background-color: #E94560;
+    color: white;
+}
+
+.btn-winner-no {
+    background-color: #0F3460;
+    color: white;
+}
+
+.btn-winner-yes:hover {
+    background: none;
+    border: 3px solid #E94560;
+    color: #E94560;
+    cursor: pointer;
+}
+
+.btn-winner-no:hover {
+    background: none;
+    border: 3px solid #17223B;
+    color: black;
+    cursor: pointer;
+}
+
+.btn-winner-no:hover {
+    background: none;
+    border: 3px solid #0F3460;
+    color: #0F3460;
+    cursor: pointer;
+}
+
+.btn-winner-back:hover {
+    background: none;
+    border: 3px solid red;
+    color: black;
+    cursor: pointer;
+}
+
+/* Instructions */
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 600px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.item-container {
+    display: none;
+    background-color: #0F3460;
+    flex-grow: 1;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 20px;
+}
+
+.item {
+    background-color: white;
+    margin-top: 20px;
+    height: 45%;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.item-header {
+    font-family: 'Bungee', cursive;
+    font-size: 2rem;
+    color: #E94560;
+}
+
+.item-paragraph {
+    font-family: 'Quantico', sans-serif;
+    font-size: 1.5rem;
+    color: #17223B;
+}
