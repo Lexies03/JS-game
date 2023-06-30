@@ -13,117 +13,127 @@
         rel="stylesheet">
     <script src="p2-js-game.js" defer></script>
 </head>
-<div id="header-container" class="header-container">
-    <h1 id="header">KAPARES</h1>
-</div>
 
-<div class="main" id="main">
-    <div class="main-container" id="main-container">
-        <p class="header-content" id="header-content">Find my Match!</p>
-        <button class="btn-play" onclick="playGame()">Play</button>
-        <div class="instruction-container">
-            <button class="btn-main" onclick="instruction()">Instruction<button>
-        </div>
-        <input type="text" placeholder="Input your name here" id="name" value="" />
-        <a
-            href="https://www.freepik.com/free-vector/flat-design-weather-effects_19344646.htm#query=sun%20and%20moon%20emoji&position=16&from_view=search&track=ais">Image
-            by Freepik</a>
-    </div>
-    <div class="item-container" id="item-container">
-        <div class="information item">
-            <p class="item-header">ABOUT THE GAME</p>
-            <p class="item-paragraph">The name <b>'KAPARES'</b> is a bisaya word which means pair in english. The
-                purpose of the game is to expand your knowledge about the antonyms or pair of a particular thing or
-                object. <br/><b>Developer: Lissa</b></p>
-        </div>
-        <div class="instruction item">
-            <p class="item-header">INSTRUCTION</p>
-            <p class="item-paragraph">Catch the <b>opposite</b> of the given word.Every right catches is equivalent to 1
-                point. You only have 1 minute to reach the goal score. If you accidentaly catch the wrong one and didn't make it in a minute, then the game will be over. Press <b>ArrowLeft</b> or <b>ArrowRight</b> on your keyboard to run left and right.</p>
-        </div>
-    </div>
-</div>
+<body>
 
-<div id="labels-container" class="labels-container">
-    <div id="game-left" class="game-left">
-        <div id="player-container" class="player-container lblContainer">
-            <label id="lbl-player" class="bl-player">Player:</label>
-            <label id="lbl-player-name" class="lbl-player-name"> Hello World</label>
-        </div>
-        <div id="word-container" class="word-container lblContainer">
-            <label id="lbl-word" class="lbl-word">Word:</label>
-            <label id="lbl-word-name" class="lbl-word-name"> Girl</label>
-        </div>
-    </div>
-    <div id="game-right" class="game-right">
-        <div id="score-container" class="score-container lblContainer">
-            <label id="lbl-score" class="lbl-score">Score:</label>
-            <label id="lbl-score-value" class="lbl-score-value"> </label>
-        </div>
-        <div id="life-container" class="life-container lblContainer">
-            <label id="lbl-life" class="lbl-life">Goal:</label>
-            <label id="lbl-life-value" class="lbl-life-value"></label>
-        </div>
-    </div>
-    <div class="timer" id="timer">
-        <h1 id="game-timer">01: 00</h1>
-    </div>
-</div>
-<div class="side-buttons-container" id="side-buttons-container">
-    <ul class="side-buttons" id="side-buttons">
-        <li>
-            <button class="btn-side-quit btn-side" id="btn-quit" onclick="quit()"><img src="Assets/img-icon-quit.png"
-                    alt="This is an image" /></button>
-        </li>
-        <li>
-            <button class="btn-side-restart btn-side" id="btn-restart" onclick="restart()"><img
-                    src="Assets/img-icon-restart.png" alt="This is an image" /></button>
-        </li>
-        <li>
-            <button class="btn-side-speakerOn btn-side" id="btn-speakerOn" onclick="speakerMuteGame()"><img
-                    src="Assets/img-icon-speakerOn.png" alt="This is an image" /></button>
-            <button class="btn-side-speakerOff btn-side" id="btn-speakerOff" onclick="speakerOnGame()"><img
-                    src="Assets/img-icon-speakerOff.png" alt="This is an image" /></button>
-        </li>
-    </ul>
-</div>
-<div class="popUp-container" id="popUp-container">
-    <div class="quit-container" id="quit-container">
-        <label class="lbl-quit" id="lbl-quit">Are you sure you want to quit?</label>
-        <div class="btn-quit-container" id="btn-quit-container">
-            <button class="btn-quit-yes" id="btn-quit-yes" onclick="quitYes()">Yes</button>
-            <button class="btn-quit-no" id="btn-quit-no" onclick="quitNo()">No</button>
-        </div>
-    </div>
-    <div class="restart-container" id="restart-container">
-        <label class="lbl-restart" id="lbl-restart">Are you sure you want to restart?</label>
-        <div class="btn-restart-container" id="btn-restart-container">
-            <button class="btn-restart-yes" id="btn-restart-yes" onclick="restartYes()">Yes</button>
-            <button class="btn-restart-no" id="btn-restart-no" onclick="restartNo()">No</button>
-        </div>
-    </div>
-    <div class="gameOver-container" id="gameOver-container">
-        <div class="btn-gameOver-container" id="btn-gameOver-container">
-            <label class="lbl-gameOver" id="lbl-gameOver">GAME OVER</label><br />
-            <label class="lbl-gameOver-score" id="lbl-gameOver-score">Your Score: </label>
-            <label class="lbl-gameOver-scoreValue" id="lbl-gameOver-scoreValue"></label><br />
-            <button class="btn-gameOver-yes" id="btn-gameOver-yes" onclick="restartYes()">Restart</button>
-            <button class="btn-gameOver-no" id="btn-gameOver-no" onclick="quitYes()">Quit</button>
-        </div>
-    </div>
-    <div class="winner-container" id="winner-container">
-        <div class="btn-winner-container" id="btn-winner-container">
-            <label class="lbl-winner" id="lbl-winner">WINNER WINNER!</label><br />
-            <label class="lbl-winner-score" id="lbl-winner-score">You got 5 points!</label>
-            <label class="lbl-winner-scoreValue" id="lbl-winner-scoreValue"></label><br />
-            <button class="btn-winner-yes" id="btn-winner-yes" onclick="restartYes()">Restart</button>
-            <button class="btn-winner-no" id="btn-winner-no" onclick="quitYes()">Quit</button>
+    <div class="introduction-container" id="introduction-container">
+        <h1 class="header" id="header">KAPARES</h1>
+        <div class="main" id="main">
+            <div class="main-container" id="main-container">
+                <p class="header-content" id="header-content">Find my Match!</p>
+                <button class="btn-play" onclick="playGame()">Play</button>
+                <div class="instruction-container">
+                    <button class="btn-instruction" onclick="instruction()">Instruction<button>
+                </div>
+                <input type="text" placeholder="Input your name here" class="name" id="name" value="" />
+                <a
+                    href="https://www.freepik.com/free-vector/flat-design-weather-effects_19344646.htm#query=sun%20and%20moon%20emoji&position=16&from_view=search&track=ais">Images
+                    by Freepik</a>
+                <a href="https://mixkit.co/">Music by Mixkit</a>
+            </div>
+            <div class="item-container" id="item-container">
+                <div class="information item">
+                    <p class="item-header">ABOUT THE GAME</p>
+                    <p class="item-paragraph">The name <b>'KAPARES'</b> is a bisaya word which means pair in english.
+                        The
+                        purpose of the game is to expand your knowledge about the antonyms or pair of a particular thing
+                        or
+                        object. <br /><b>Developer: Lissa</b></p>
+                </div>
+                <div class="instruction item">
+                    <p class="item-header">INSTRUCTION</p>
+                    <p class="item-paragraph">Catch the <b>opposite</b> of the given word.Every right catches is
+                        equivalent to 1
+                        point. You only have 1 minute to reach the goal score. If you accidentaly catch the wrong one
+                        and didn't make it in a minute, then the game will be over. Press <b>ArrowLeft</b> or
+                        <b>ArrowRight</b> on your keyboard to run left and right.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
-</div>
+    <div id="labels-container" class="labels-container">
+        <div id="game-left" class="game-left">
+            <div id="player-container" class="player-container lblContainer">
+                <label id="lbl-player" class="bl-player">Player:</label>
+                <label id="lbl-player-name" class="lbl-player-name"> Hello World</label>
+            </div>
+            <div id="word-container" class="word-container lblContainer">
+                <label id="lbl-word" class="lbl-word">Word:</label>
+                <label id="lbl-word-name" class="lbl-word-name"> Girl</label>
+            </div>
+        </div>
+        <div id="game-right" class="game-right">
+            <div id="score-container" class="score-container lblContainer">
+                <label id="lbl-score" class="lbl-score">Score:</label>
+                <label id="lbl-score-value" class="lbl-score-value"> </label>
+            </div>
+            <div id="life-container" class="life-container lblContainer">
+                <label id="lbl-life" class="lbl-life">Goal:</label>
+                <label id="lbl-life-value" class="lbl-life-value"></label>
+            </div>
+        </div>
+        <div class="timer" id="timer">
+            <h1 id="game-timer">01: 00</h1>
+        </div>
+    </div>
+    <div class="side-buttons-container" id="side-buttons-container">
+        <ul class="side-buttons" id="side-buttons">
+            <li>
+                <button class="btn-side-quit btn-side" id="btn-quit" onclick="quit()"><img
+                        src="Assets/img-icon-quit.png" alt="This is an image" /></button>
+            </li>
+            <li>
+                <button class="btn-side-restart btn-side" id="btn-restart" onclick="restart()"><img
+                        src="Assets/img-icon-restart.png" alt="This is an image" /></button>
+            </li>
+            <li>
+                <button class="btn-side-speakerOn btn-side" id="btn-speakerOn" onclick="speakerMuteGame()"><img
+                        src="Assets/img-icon-speakerOn.png" alt="This is an image" /></button>
+                <button class="btn-side-speakerOff btn-side" id="btn-speakerOff" onclick="speakerOnGame()"><img
+                        src="Assets/img-icon-speakerOff.png" alt="This is an image" /></button>
+            </li>
+        </ul>
+    </div>
+    <div class="popUp-container" id="popUp-container">
+        <div class="quit-container" id="quit-container">
+            <label class="lbl-quit" id="lbl-quit">Are you sure you want to quit?</label>
+            <div class="btn-quit-container" id="btn-quit-container">
+                <button class="btn-quit-yes" id="btn-quit-yes" onclick="quitYes()">Yes</button>
+                <button class="btn-quit-no" id="btn-quit-no" onclick="quitNo()">No</button>
+            </div>
+        </div>
+        <div class="restart-container" id="restart-container">
+            <label class="lbl-restart" id="lbl-restart">Are you sure you want to restart?</label>
+            <div class="btn-restart-container" id="btn-restart-container">
+                <button class="btn-restart-yes" id="btn-restart-yes" onclick="restartYes()">Yes</button>
+                <button class="btn-restart-no" id="btn-restart-no" onclick="restartNo()">No</button>
+            </div>
+        </div>
+        <div class="gameOver-container" id="gameOver-container">
+            <div class="btn-gameOver-container" id="btn-gameOver-container">
+                <label class="lbl-gameOver" id="lbl-gameOver">GAME OVER</label><br />
+                <label class="lbl-gameOver-score" id="lbl-gameOver-score">Your Score: </label>
+                <label class="lbl-gameOver-scoreValue" id="lbl-gameOver-scoreValue"></label><br />
+                <button class="btn-gameOver-yes" id="btn-gameOver-yes" onclick="restartYes()">Restart</button>
+                <button class="btn-gameOver-no" id="btn-gameOver-no" onclick="quitYes()">Quit</button>
+            </div>
+        </div>
+        <div class="winner-container" id="winner-container">
+            <div class="btn-winner-container" id="btn-winner-container">
+                <label class="lbl-winner" id="lbl-winner">WINNER WINNER!</label><br />
+                <label class="lbl-winner-score" id="lbl-winner-score">You got 5 points!</label>
+                <label class="lbl-winner-scoreValue" id="lbl-winner-scoreValue"></label><br />
+                <button class="btn-winner-yes" id="btn-winner-yes" onclick="restartYes()">Restart</button>
+                <button class="btn-winner-no" id="btn-winner-no" onclick="quitYes()">Quit</button>
+            </div>
+        </div>
 
-<canvas id="canvasOne"></canvas>
+    </div>
+
+    <canvas id="canvasOne"></canvas>
+
 </body>
 
 </html>

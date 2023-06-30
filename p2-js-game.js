@@ -1,7 +1,6 @@
 const canvas = document.getElementById("canvasOne");
 //Intro
-const headerContainer = document.getElementById("header-container");
-const main = document.getElementById("main");
+const intro = document.getElementById("introduction-container");
 const mainContainer = document.getElementById("main-container");
 const sideButtons = document.getElementById("side-buttons-container");
 const labelsContainer = document.getElementById("labels-container");
@@ -29,7 +28,7 @@ let goal = 5;
 lifeVal.textContent = goal;
 
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = innerHeight;
 
 const pointX = canvas.width / 2 - 50;
 const pointY = canvas.height - 100;
@@ -69,9 +68,9 @@ function playGame() {
   openingSound.pause();
   btnplaySound.play();
   gameSound.play();
-  headerContainer.style.display = "none";
-  main.style.display = "none";
-  itemContainer.style.display = "none";
+
+  intro.style.display = "none";
+
   labelsContainer.style.display = "flex";
   canvas.style.display = "block";
   sideButtons.style.display = "block";
@@ -96,8 +95,7 @@ function quitYes() {
   clickSoundMini.play();
   popUp.style.display = "none";
   sideButtons.style.display = "none";
-  headerContainer.style.display = "block";
-  canvas.style.display = "none";  
+  canvas.style.display = "none";
   labelsContainer.style.display = "none";
   isRunning = false;
   location.reload();
@@ -119,6 +117,7 @@ function restart() {
   popUp.style.display = "flex";
   quitContainer.style.display = "none";
   gameOverContainer.style.display = "none";
+  winnerContainer.style.display = "none";
   restartContainer.style.display = "block";
   isRunning = false;
 }
@@ -130,7 +129,7 @@ function restartYes() {
   restartGameTimer();
   textArray();
   // blocksArray();
-  
+
   score = 0;
   scoreVal.textContent = score;
 
@@ -160,6 +159,7 @@ function gameOver() {
   sideButtons.style.display = "none";
   isRunning = false;
   lblGameOverScore.textContent = score;
+  errorSound.play();
 }
 
 function gameOverYes() {
@@ -281,16 +281,16 @@ function blocksArray() {
 }
 
 function instruction() {
-  if (itemContainer.style.display == "block") {
+  if (itemContainer.style.display == "flex") {
     itemContainer.style.display = "none";
-    headerContent.style.fontSize = 4 + "rem";
-    mainContainer.style.borderTopRightRadius = 30 + 'px';
-    mainContainer.style.borderTopRightRadius = 30 + 'px';
-  } else {
-    itemContainer.style.display = "block";
     headerContent.style.fontSize = 3 + "rem";
+    mainContainer.style.borderTopRightRadius = 30 + "px";
+    mainContainer.style.borderBottomRightRadius = 30 + "px";
+  } else {
+    itemContainer.style.display = "flex";
+    headerContent.style.fontSize = 2 + "rem";
     mainContainer.style.borderTopRightRadius = 0;
-    mainContainer.style.borderTopRightRadius = 0;
+    mainContainer.style.borderBottomRightRadius = 0;
   }
 }
 
@@ -313,7 +313,7 @@ class Character {
       x: 0,
       y: 1,
     };
-    this.width = 100;
+    this.width = 80;
     this.height = 100;
 
     this.img = imgIdle;
@@ -521,4 +521,4 @@ function animate() {
 }
 animate();
 textArray();
-openingSound.play();
+// openingSound.play();

@@ -4,18 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #17223B;
-}
-
-#game {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 canvas {
     background: url('Assets/img-background.jpg');
     background-repeat: no-repeat;
@@ -24,51 +12,63 @@ canvas {
     margin: 0 auto;
 }
 
-.header-container h1 {
-    display: block;
-    font-family: 'Quantico', sans-serif;
-    font-weight: bolder;
-    font-size: 8rem;
-    text-align: center;
-    color: white;
+.introduction-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: url('Assets/img-background2.jpg');
+    background-size: cover;
+    align-items: center;
+    background-color: #E94560;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .main-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
-    margin: 0 auto;
-    font-family: 'Quantico', sans-serif;
+    justify-content: space-evenly;
+    width: 60%;
+    height: 100%;
+    background: url('Assets/img-background2.jpg');
+    background-size: cover;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 50%;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    padding: 40px;
+}
+
+.header {
+    display: block;
+    font-family: 'Quantico', sans-serif;
+    font-weight: bolder;
+    font-size: 6rem;
+    text-align: center;
     color: white;
-    background: url('Assets/img-background2.jpg');
-    background-size: cover;
 }
 
 .header-content {
-    font-size: 4rem;
-}
-
-.btn-main {
-    background-color: #17223B;
-    font-size: 2rem;
-    padding: 10px;
-    border-radius: 10px;
+    font-family: 'Quantico', sans-serif;
+    font-size: 3.5rem;
     color: white;
-    cursor: pointer;
 }
 
 .btn-play {
     width: 50%;
     height: auto;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: 'Bungee', cursive;
     border: 1px solid black;
     padding: 0px;
@@ -76,27 +76,60 @@ canvas {
     border-radius: 20%;
     cursor: pointer;
     color: white;
-
 }
 
-.link-btn-play {
-    width: 200px;
-    text-decoration: none;
-
+.btn-instruction {
+    background-color: #17223B;
+    font-size: 1.3rem;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
 }
 
-#name {
+.name {
     font-family: 'Quantico', sans-serif;
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: #E94560;
     border-radius: 20px;
     padding: 10px;
+
 }
 
-.instruction-container img {
-    height: 50px;
-    width: 50px;
-    object-fit: contain;
+/* Item */
+.item-container {
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: url('Assets/img-background3.jpg');
+    background-size: cover;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 10px;
+}
+
+.item {
+    background-color: white;
+    margin: 10px;
+    height: 45%;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.item-header {
+    font-family: 'Bungee', cursive;
+    font-size: 1.2rem;
+    color: #E94560;
+}
+
+.item-paragraph {
+    font-family: 'Quantico', sans-serif;
+    font-size: 1.1rem;
+    color: #17223B;
 }
 
 /* Labels */
@@ -420,44 +453,4 @@ canvas {
     border: 3px solid red;
     color: black;
     cursor: pointer;
-}
-
-/* Instructions */
-.main {
-    display: flex;
-    flex-direction: row;
-    height: 600px;
-    width: 90%;
-    margin: 0 auto;
-}
-
-.item-container {
-    display: none;
-    background-color: #0F3460;
-    flex-grow: 1;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    padding: 20px;
-}
-
-.item {
-    background-color: white;
-    margin-top: 20px;
-    height: 45%;
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-
-}
-
-.item-header {
-    font-family: 'Bungee', cursive;
-    font-size: 2rem;
-    color: #E94560;
-}
-
-.item-paragraph {
-    font-family: 'Quantico', sans-serif;
-    font-size: 1.5rem;
-    color: #17223B;
 }
