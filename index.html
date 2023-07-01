@@ -67,7 +67,7 @@
         <div id="game-right" class="game-right">
             <div id="score-container" class="score-container lblContainer">
                 <label id="lbl-score" class="lbl-score">Score:</label>
-                <label id="lbl-score-value" class="lbl-score-value"> </label>
+                <label id="lbl-score-value" class="lbl-score-value">0</label>
             </div>
             <div id="life-container" class="life-container lblContainer">
                 <label id="lbl-life" class="lbl-life">Goal:</label>
@@ -78,6 +78,14 @@
             <h1 id="game-timer">01: 00</h1>
         </div>
     </div>
+
+    <div class="btn-control-container" id="btn-control-container">
+        <button class="btn-left-arrow btn-control-arrow" id="btn-left-arrow" onclick="arrowLeftControl()"><img
+                src="Assets/img-arrow-left.png" alt="This is an image" /></button>
+        <button class="btn-right-arrow btn-control-arrow" id="btn-right-arrow" onclick="arrowRightControl()"><img
+                src="Assets/img-arrow-right.png" alt="This is an image" /></button>
+    </div>
+
     <div class="side-buttons-container" id="side-buttons-container">
         <ul class="side-buttons" id="side-buttons">
             <li>
@@ -123,8 +131,9 @@
         <div class="winner-container" id="winner-container">
             <div class="btn-winner-container" id="btn-winner-container">
                 <label class="lbl-winner" id="lbl-winner">WINNER WINNER!</label><br />
-                <label class="lbl-winner-score" id="lbl-winner-score">You got 5 points!</label>
-                <label class="lbl-winner-scoreValue" id="lbl-winner-scoreValue"></label><br />
+                <label class="lbl-winner-name" id="lbl-winner-name">hey</label><br />
+                <label class="lbl-winner-score" id="lbl-winner-score">Sayo na ang Korona!</label>
+                <!-- <label class="lbl-winner-scoreValue" id="lbl-winner-scoreValue"></label><br /> --><br />
                 <button class="btn-winner-yes" id="btn-winner-yes" onclick="restartYes()">Restart</button>
                 <button class="btn-winner-no" id="btn-winner-no" onclick="quitYes()">Quit</button>
             </div>

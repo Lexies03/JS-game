@@ -19,6 +19,9 @@ const restartContainer = document.getElementById("restart-container");
 const gameOverContainer = document.getElementById("gameOver-container");
 const lblGameOverScore = document.getElementById("lbl-gameOver-scoreValue");
 const winnerContainer = document.getElementById("winner-container");
+const lblWinnerName = document.getElementById("lbl-winner-name");
+//arrow buttons
+const arrowButtonsContainer = document.getElementById("btn-control-container");
 const ctx = canvas.getContext("2d");
 
 //global
@@ -68,16 +71,12 @@ function playGame() {
   openingSound.pause();
   btnplaySound.play();
   gameSound.play();
-
   intro.style.display = "none";
-
   labelsContainer.style.display = "flex";
   canvas.style.display = "block";
   sideButtons.style.display = "block";
-
   let inputVal = input.value;
   playerName.textContent = inputVal;
-
   isRunning = true;
   animate();
 }
@@ -111,7 +110,6 @@ function quitNo() {
 function restart() {
   clickSoundMini.play();
   canvas.style.display = "block";
-  main.style.display = "none";
   itemContainer.style.display = "none";
   labelsContainer.style.display = "flex";
   popUp.style.display = "flex";
@@ -128,11 +126,11 @@ function restartYes() {
   sideButtons.style.display = "block";
   restartGameTimer();
   textArray();
-  // blocksArray();
-
+  gameSound.play();
   score = 0;
   scoreVal.textContent = score;
-
+  goal = 5;
+  lifeVal.textContent = goal;
   isRunning = true;
   animate();
 }
@@ -140,7 +138,6 @@ function restartYes() {
 function restartNo() {
   clickSoundMini.play();
   popUp.style.display = "none";
-
   isRunning = true;
   animate();
 }
@@ -148,8 +145,7 @@ function restartNo() {
 function gameOver() {
   clickSoundMini.play();
   canvas.style.display = "block";
-  main.style.display = "none";
-  itemContainer.style.display = "none";
+  intro.style.display = "none";
   labelsContainer.style.display = "flex";
   popUp.style.display = "flex";
   quitContainer.style.display = "none";
@@ -160,6 +156,7 @@ function gameOver() {
   isRunning = false;
   lblGameOverScore.textContent = score;
   errorSound.play();
+  gameSound.pause();
 }
 
 function gameOverYes() {
@@ -169,26 +166,45 @@ function gameOverYes() {
 function gameOverNo() {
   clickSoundMini.play();
   popUp.style.display = "none";
-
   isRunning = true;
   animate();
 }
 
 function winner() {
-  clickSoundMini.play();
-  winnerSound.play();
-  gameSound.pause();
-  canvas.style.display = "block";
-  main.style.display = "none";
-  itemContainer.style.display = "none";
-  labelsContainer.style.display = "flex";
-  popUp.style.display = "flex";
-  quitContainer.style.display = "none";
-  restartContainer.style.display = "none";
-  gameOverContainer.style.display = "none";
-  winnerContainer.style.display = "block";
-  sideButtons.style.display = "none";
-  isRunning = false;
+  if (lblWinnerName.textContent == null) {
+    clickSoundMini.play();
+    winnerSound.play();
+    gameSound.pause();
+    canvas.style.display = "block";
+    main.style.display = "none";
+    itemContainer.style.display = "none";
+    labelsContainer.style.display = "flex";
+    popUp.style.display = "flex";
+    quitContainer.style.display = "none";
+    restartContainer.style.display = "none";
+    gameOverContainer.style.display = "none";
+    winnerContainer.style.display = "block";
+    sideButtons.style.display = "none";
+    lblWinnerName.style.display = "none";
+    isRunning = false;
+  } else {
+    clickSoundMini.play();
+    winnerSound.play();
+    gameSound.pause();
+    canvas.style.display = "block";
+    main.style.display = "none";
+    itemContainer.style.display = "none";
+    labelsContainer.style.display = "flex";
+    popUp.style.display = "flex";
+    quitContainer.style.display = "none";
+    restartContainer.style.display = "none";
+    gameOverContainer.style.display = "none";
+    winnerContainer.style.display = "block";
+    sideButtons.style.display = "none";
+    lblWinnerName.style.display = "block";
+    isRunning = false;
+    lblWinnerName.textContent = input.value;
+  }
 }
 
 function speakerMuteGame() {
@@ -207,90 +223,19 @@ function speakerOnGame() {
   gameSound.play();
 }
 
-//This is the method to know the collision of the character and the falling blocks/images.
-function collision() {
-  blocks.forEach(function (blocks) {
-    if (
-      character.position.y + character.height <= blocks.position.y &&
-      character.position.y + character.height + character.speed.y >=
-        blocks.position.y &&
-      character.position.x <= blocks.width + blocks.position.x &&
-      character.position.x + character.width >= blocks.position.x
-    ) {
-      if (blocks.img == imgBoy && wordVal.textContent == "girl") {
-        score++;
-        scoreVal.textContent = score;
-        console.log("boy");
-        catchSound.play();
-        console.log(score);
-        textArray();
-      } else if (blocks.img == imgGirl && wordVal.textContent == "boy") {
-        score++;
-        scoreVal.textContent = score;
-        console.log("girl");
-        catchSound.play();
-        console.log(score);
-        textArray();
-      } else if (blocks.img == imgSun && wordVal.textContent == "moon") {
-        score++;
-        scoreVal.textContent = score;
-        console.log("sun");
-        catchSound.play();
-        console.log(score);
-        textArray();
-      } else if (blocks.img == imgMoon && wordVal.textContent == "sun") {
-        score++;
-        scoreVal.textContent = score;
-        console.log("moon");
-        catchSound.play();
-        console.log(score);
-        textArray();
-      } else {
-        errorSound.play();
-        gameOver();
-      }
-    }
-  });
-}
-
-//This is the random word that I put at the top left of the game.
-function textArray() {
-  //Data can be expanded
-  // const words = ["boy","girl", "water","fire","day","night","moon","sun","hard","soft",];
-  const words = ["boy", "girl", "moon", "sun"];
-  const randomWords = words[Math.floor(Math.random() * words.length)];
-  wordVal.textContent = randomWords;
-}
-
-//This is where the fallingImages Array run.
-function blocksArray() {
-  if (blocks.length < 10) {
-    const randomX = Math.floor(Math.random() * innerWidth);
-    const randomY = -100;
-    // const imgs = [imgBoy, imgGirl, imgSun, imgMoon, imgDay, imgNight];
-    const imgs = [imgBoy, imgGirl, imgSun, imgMoon];
-    const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
-    blocks.push(new fallingImages(randomX, randomY, randomImg));
-  }
-
-  blocks.forEach((block, index) => {
-    if (block.position.y >= canvas.height) {
-      blocks.splice(index, 1);
-    }
-  });
-}
-
 function instruction() {
   if (itemContainer.style.display == "flex") {
     itemContainer.style.display = "none";
-    headerContent.style.fontSize = 3 + "rem";
+    // headerContent.style.fontSize = .8 + "rem";
     mainContainer.style.borderTopRightRadius = 30 + "px";
     mainContainer.style.borderBottomRightRadius = 30 + "px";
+    clickSoundMini.play();
   } else {
     itemContainer.style.display = "flex";
-    headerContent.style.fontSize = 2 + "rem";
+    // headerContent.style.fontSize = 1.8 + "rem";
     mainContainer.style.borderTopRightRadius = 0;
     mainContainer.style.borderBottomRightRadius = 0;
+    clickSoundMini.play();
   }
 }
 
@@ -422,15 +367,6 @@ const character = new Character();
 let texts = [];
 let blocks = [];
 
-//classes on sounds
-const openingSound = new Audio("Assets/Sounds/audio-opening.wav");
-const clickSoundMini = new Audio("Assets/Sounds/audio-miniClick.wav");
-const catchSound = new Audio("Assets/Sounds/audio-catch.wav");
-const errorSound = new Audio("Assets/Sounds/audio-error.wav");
-const gameSound = new Audio("Assets/Sounds/audio-game.mp3");
-const btnplaySound = new Audio("Assets/Sounds/audio-play.mp3");
-const winnerSound = new Audio("Assets/Sounds/audio-winner.wav");
-
 //classes on Images
 const imgBoy = new Image();
 const imgGirl = new Image();
@@ -442,6 +378,15 @@ imgBoy.src = "Assets/img-boy.png";
 imgGirl.src = "Assets/img-girl.png";
 imgSun.src = "Assets/img-sun.png";
 imgMoon.src = "Assets/img-moon.png";
+
+//classes on sounds
+const openingSound = new Audio("Assets/Sounds/audio-opening.wav");
+const clickSoundMini = new Audio("Assets/Sounds/audio-miniClick.wav");
+const catchSound = new Audio("Assets/Sounds/audio-catch.wav");
+const errorSound = new Audio("Assets/Sounds/audio-error.wav");
+const gameSound = new Audio("Assets/Sounds/audio-game.mp3");
+const btnplaySound = new Audio("Assets/Sounds/audio-play.mp3");
+const winnerSound = new Audio("Assets/Sounds/audio-winner.wav");
 
 //obj move keys. Use to control my character to run left and right.
 const keys = {
@@ -463,38 +408,98 @@ function keyPressed() {
   }
 }
 
-//Events
-window.addEventListener("keydown", function ({ key }) {
-  switch (key) {
-    case "ArrowLeft":
-      console.log("left");
-      keys.left.pressed = true;
-      character.currentSprite = character.sprite.run.left;
-      break;
-    case "ArrowRight":
-      console.log("right");
-      keys.right.pressed = true;
-      character.currentSprite = character.sprite.run.right;
-      break;
-  }
-});
+//This is the method to know the collision of the character and the falling blocks/images.
+function collision() {
+  blocks.forEach(function (blocks) {
+    if (
+      character.position.y + character.height <= blocks.position.y &&
+      character.position.y + character.height + character.speed.y >=
+        blocks.position.y &&
+      character.position.x <= blocks.width + blocks.position.x &&
+      character.position.x + character.width >= blocks.position.x
+      //preserved for additional changes in the future
+      // character.position.y + character.height >= blocks.position.y &&
+      // character.position.y + character.height + character.speed.y >=
+      //   blocks.position.y &&
+      // character.position.y <= blocks.position.y + blocks.height &&
+      // character.position.x + character.width >= blocks.position.x &&
+      // character.position.x <= blocks.position.x + blocks.width
+    ) {
+      if (blocks.img == imgBoy && wordVal.textContent == "girl") {
+        score++;
+        scoreVal.textContent = score;
+        catchSound.play();
+        console.log("boy");
+        console.log(score);
+        textArray();
+      } else if (blocks.img == imgGirl && wordVal.textContent == "boy") {
+        score++;
+        scoreVal.textContent = score;
+        catchSound.play();
+        console.log("girl");
+        console.log(score);
+        textArray();
+      } else if (blocks.img == imgSun && wordVal.textContent == "moon") {
+        score++;
+        scoreVal.textContent = score;
+        catchSound.play();
+        console.log("sun");
+        console.log(score);
+        textArray();
+      } else if (blocks.img == imgMoon && wordVal.textContent == "sun") {
+        score++;
+        scoreVal.textContent = score;
+        catchSound.play();
+        console.log("moon");
+        console.log(score);
+        textArray();
+      } else {
+        console.log("Game Over");
+        gameOver();
+      }
+    } else {
+      console.log("Not Colliding");
+    }
+  });
+}
 
-window.addEventListener("keyup", function ({ key }) {
-  switch (key) {
-    case "ArrowLeft":
-      console.log("left");
-      keys.left.pressed = false;
-      character.currentSprite = character.sprite.idle.right;
-      break;
-    case "ArrowRight":
-      console.log("right");
-      keys.right.pressed = false;
-      character.currentSprite = character.sprite.idle.right;
-      break;
-  }
-});
+//This is the random word that I put at the top left of the game.
+function textArray() {
+  //Data can be expanded
+  // const words = ["boy","girl", "water","fire","day","night","moon","sun","hard","soft",];
+  const words = ["boy", "girl", "moon", "sun"];
+  const randomWords = words[Math.floor(Math.random() * words.length)];
+  wordVal.textContent = randomWords;
+}
 
-//Methods for the updates of the arrays. I put these two to the animate method.
+//This is where the fallingImages Array run.
+function blocksArray() {
+  if (blocks.length < 10) {
+    const randomX = Math.floor(Math.random() * innerWidth);
+    const randomY = -100;
+    // const imgs = [imgBoy, imgGirl, imgSun, imgMoon, imgDay, imgNight];
+    const imgs = [imgBoy, imgGirl, imgSun, imgMoon];
+    const randomImg = imgs[Math.floor(Math.random() * imgs.length)];
+    blocks.push(new fallingImages(randomX, randomY, randomImg));
+  }
+
+  blocks.forEach((block, index) => {
+    if (block.position.y >= canvas.height) {
+      blocks.splice(index, 1);
+    }
+  });
+}
+
+//Temporary Controls for mobile phones
+function arrowLeftControl() {
+  character.speed.x = -35;
+}
+
+function arrowRightControl() {
+  character.speed.x = 35;
+}
+
+//Methods for the updates of the arrays.
 function blocksUpdate() {
   blocks.forEach(function (blocks) {
     blocks.update();
@@ -514,11 +519,38 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     character.update();
     blocksUpdate();
-    keyPressed();
     collision();
+    keyPressed();
     blocksArray();
   }
 }
 animate();
 textArray();
 // openingSound.play();
+
+//Events
+window.addEventListener("keydown", function ({ key }) {
+  switch (key) {
+    case "ArrowLeft":
+      keys.left.pressed = true;
+      character.currentSprite = character.sprite.run.left;
+      break;
+    case "ArrowRight":
+      keys.right.pressed = true;
+      character.currentSprite = character.sprite.run.right;
+      break;
+  }
+});
+
+window.addEventListener("keyup", function ({ key }) {
+  switch (key) {
+    case "ArrowLeft":
+      keys.left.pressed = false;
+      character.currentSprite = character.sprite.idle.right;
+      break;
+    case "ArrowRight":
+      keys.right.pressed = false;
+      character.currentSprite = character.sprite.idle.right;
+      break;
+  }
+});
