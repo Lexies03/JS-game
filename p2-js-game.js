@@ -27,10 +27,10 @@ const ctx = canvas.getContext("2d");
 //global
 let isRunning = false;
 let score = 0;
-let goal = 5;
+let goal = 2;
 lifeVal.textContent = goal;
 
-canvas.width = window.innerWidth;
+canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 const pointX = canvas.width / 2 - 50;
@@ -129,7 +129,7 @@ function restartYes() {
   gameSound.play();
   score = 0;
   scoreVal.textContent = score;
-  goal = 5;
+  goal = goal;
   lifeVal.textContent = goal;
   isRunning = true;
   animate();
@@ -224,19 +224,17 @@ function speakerOnGame() {
 }
 
 function instruction() {
-  if (itemContainer.style.display == "flex") {
-    itemContainer.style.display = "none";
-    // headerContent.style.fontSize = .8 + "rem";
-    mainContainer.style.borderTopRightRadius = 30 + "px";
-    mainContainer.style.borderBottomRightRadius = 30 + "px";
-    clickSoundMini.play();
-  } else {
-    itemContainer.style.display = "flex";
-    // headerContent.style.fontSize = 1.8 + "rem";
-    mainContainer.style.borderTopRightRadius = 0;
-    mainContainer.style.borderBottomRightRadius = 0;
-    clickSoundMini.play();
-  }
+  itemContainer.style.display = "flex";
+  mainContainer.style.borderTopRightRadius = 0;
+  mainContainer.style.borderBottomRightRadius = 0;
+  clickSoundMini.play();
+}
+
+function btnBackHome() {
+  itemContainer.style.display = "none";
+  mainContainer.style.borderTopRightRadius = 30 + "px";
+  mainContainer.style.borderBottomRightRadius = 30 + "px";
+  clickSoundMini.play();
 }
 
 //classes
@@ -408,6 +406,13 @@ function keyPressed() {
   }
 }
 
+function successfullyCollided() {
+  score++;
+  scoreVal.textContent = score;
+  catchSound.play();
+  textArray();
+}
+
 //This is the method to know the collision of the character and the falling blocks/images.
 function collision() {
   blocks.forEach(function (blocks) {
@@ -426,33 +431,13 @@ function collision() {
       // character.position.x <= blocks.position.x + blocks.width
     ) {
       if (blocks.img == imgBoy && wordVal.textContent == "girl") {
-        score++;
-        scoreVal.textContent = score;
-        catchSound.play();
-        console.log("boy");
-        console.log(score);
-        textArray();
+        successfullyCollided();
       } else if (blocks.img == imgGirl && wordVal.textContent == "boy") {
-        score++;
-        scoreVal.textContent = score;
-        catchSound.play();
-        console.log("girl");
-        console.log(score);
-        textArray();
+        successfullyCollided();
       } else if (blocks.img == imgSun && wordVal.textContent == "moon") {
-        score++;
-        scoreVal.textContent = score;
-        catchSound.play();
-        console.log("sun");
-        console.log(score);
-        textArray();
+        successfullyCollided();
       } else if (blocks.img == imgMoon && wordVal.textContent == "sun") {
-        score++;
-        scoreVal.textContent = score;
-        catchSound.play();
-        console.log("moon");
-        console.log(score);
-        textArray();
+        successfullyCollided();
       } else {
         console.log("Game Over");
         gameOver();
