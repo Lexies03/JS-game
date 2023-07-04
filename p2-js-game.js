@@ -27,8 +27,9 @@ const ctx = canvas.getContext("2d");
 //global
 let isRunning = false;
 let score = 0;
-let goal = 2;
+const goal = 2;
 lifeVal.textContent = goal;
+let state = true; //toggle intruction() function
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -70,14 +71,13 @@ function playGame() {
   startGameTimer();
   openingSound.pause();
   btnplaySound.play();
-  gameSound.play();
   intro.style.display = "none";
   labelsContainer.style.display = "flex";
   canvas.style.display = "block";
   sideButtons.style.display = "block";
   let inputVal = input.value;
   playerName.textContent = inputVal;
-  isRunning = true;
+  hidePopUpContainers();
   animate();
 }
 
@@ -88,6 +88,7 @@ function quit() {
   quitContainer.style.display = "block";
   isRunning = false;
   clickSoundMini.play();
+  gameSound.pause();
 }
 
 function quitYes() {
@@ -100,14 +101,8 @@ function quitYes() {
   location.reload();
 }
 
-function quitNo() {
-  clickSoundMini.play();
-  popUp.style.display = "none";
-  isRunning = true;
-  animate();
-}
-
 function restart() {
+  gameSound.pause();
   clickSoundMini.play();
   canvas.style.display = "block";
   itemContainer.style.display = "none";
@@ -120,26 +115,28 @@ function restart() {
   isRunning = false;
 }
 
+//This is just a temporary restart. It works almost the same in restartQuitNo() function. I'm still trying to find solution for this.
+//It restarts the score and timer.
 function restartYes() {
-  clickSoundMini.play();
-  popUp.style.display = "none";
   sideButtons.style.display = "block";
   restartGameTimer();
   textArray();
-  gameSound.play();
   score = 0;
   scoreVal.textContent = score;
-  goal = goal;
-  lifeVal.textContent = goal;
-  isRunning = true;
+  hidePopUpContainers();
   animate();
 }
 
-function restartNo() {
+function restartAndQuitNo() {
+  hidePopUpContainers();
+  animate();
+}
+
+function hidePopUpContainers() {
+  gameSound.play();
   clickSoundMini.play();
   popUp.style.display = "none";
   isRunning = true;
-  animate();
 }
 
 function gameOver() {
@@ -163,20 +160,12 @@ function gameOverYes() {
   clickSoundMini.play();
 }
 
-function gameOverNo() {
-  clickSoundMini.play();
-  popUp.style.display = "none";
-  isRunning = true;
-  animate();
-}
-
 function winner() {
   if (lblWinnerName.textContent == null) {
     clickSoundMini.play();
     winnerSound.play();
     gameSound.pause();
     canvas.style.display = "block";
-    main.style.display = "none";
     itemContainer.style.display = "none";
     labelsContainer.style.display = "flex";
     popUp.style.display = "flex";
@@ -192,7 +181,6 @@ function winner() {
     winnerSound.play();
     gameSound.pause();
     canvas.style.display = "block";
-    main.style.display = "none";
     itemContainer.style.display = "none";
     labelsContainer.style.display = "flex";
     popUp.style.display = "flex";
@@ -207,27 +195,35 @@ function winner() {
   }
 }
 
-function speakerMuteGame() {
-  const speakerOff = document.getElementById("btn-speakerOff");
-  const speakerOn = document.getElementById("btn-speakerOn");
-  speakerOff.style.display = "block";
-  speakerOn.style.display = "none";
-  gameSound.pause();
-}
-
-function speakerOnGame() {
-  const speakerOff = document.getElementById("btn-speakerOff");
-  const speakerOn = document.getElementById("btn-speakerOn");
-  speakerOff.style.display = "none";
-  speakerOn.style.display = "block";
-  gameSound.play();
+function gameToggleSpeaker() {
+  if (state === true) {
+    const speakerOff = document.getElementById("btn-speakerOff");
+    const speakerOn = document.getElementById("btn-speakerOn");
+    speakerOff.style.display = "none";
+    speakerOn.style.display = "block";
+    gameSound.play();
+    state = false;
+  } else {
+    const speakerOff = document.getElementById("btn-speakerOff");
+    const speakerOn = document.getElementById("btn-speakerOn");
+    speakerOff.style.display = "block";
+    speakerOn.style.display = "none";
+    gameSound.pause();
+    state = true;
+  }
 }
 
 function instruction() {
-  itemContainer.style.display = "flex";
-  mainContainer.style.borderTopRightRadius = 0;
-  mainContainer.style.borderBottomRightRadius = 0;
-  clickSoundMini.play();
+  if (state === true) {
+    itemContainer.style.display = "flex";
+    mainContainer.style.borderTopRightRadius = 0;
+    mainContainer.style.borderBottomRightRadius = 0;
+    clickSoundMini.play();
+    state = false;
+  } else {
+    btnBackHome();
+    state = true;
+  }
 }
 
 function btnBackHome() {
@@ -497,22 +493,6 @@ function textUpdate() {
   });
 }
 
-//This is where I load my code.
-function animate() {
-  if (isRunning) {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    character.update();
-    blocksUpdate();
-    collision();
-    keyPressed();
-    blocksArray();
-  }
-}
-animate();
-textArray();
-// openingSound.play();
-
 //Events
 window.addEventListener("keydown", function ({ key }) {
   switch (key) {
@@ -539,3 +519,19 @@ window.addEventListener("keyup", function ({ key }) {
       break;
   }
 });
+
+//This is where I load my code.
+function animate() {
+  if (isRunning) {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    character.update();
+    blocksUpdate();
+    collision();
+    keyPressed();
+    blocksArray();
+  }
+}
+animate();
+textArray();
+// openingSound.play();

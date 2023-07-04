@@ -98,9 +98,9 @@
                         src="Assets/img-icon-restart.png" alt="This is an image" /></button>
             </li>
             <li>
-                <button class="btn-side-speakerOn btn-side" id="btn-speakerOn" onclick="speakerMuteGame()"><img
+                <button class="btn-side-speakerOn btn-side" id="btn-speakerOn" onclick="gameToggleSpeaker()"><img
                         src="Assets/img-icon-speakerOn.png" alt="This is an image" /></button>
-                <button class="btn-side-speakerOff btn-side" id="btn-speakerOff" onclick="speakerOnGame()"><img
+                <button class="btn-side-speakerOff btn-side" id="btn-speakerOff" onclick="gameToggleSpeaker()"><img
                         src="Assets/img-icon-speakerOff.png" alt="This is an image" /></button>
             </li>
         </ul>
@@ -110,14 +110,14 @@
             <label class="lbl-quit" id="lbl-quit">Are you sure you want to quit?</label>
             <div class="btn-quit-container" id="btn-quit-container">
                 <button class="btn-quit-yes" id="btn-quit-yes" onclick="quitYes()">Yes</button>
-                <button class="btn-quit-no" id="btn-quit-no" onclick="quitNo()">No</button>
+                <button class="btn-quit-no" id="btn-quit-no" onclick="restartAndQuitNo()()">No</button>
             </div>
         </div>
         <div class="restart-container" id="restart-container">
             <label class="lbl-restart" id="lbl-restart">Are you sure you want to restart?</label>
             <div class="btn-restart-container" id="btn-restart-container">
                 <button class="btn-restart-yes" id="btn-restart-yes" onclick="restartYes()">Yes</button>
-                <button class="btn-restart-no" id="btn-restart-no" onclick="restartNo()">No</button>
+                <button class="btn-restart-no" id="btn-restart-no" onclick="restartAndQuitNo()()">No</button>
             </div>
         </div>
         <div class="gameOver-container" id="gameOver-container">
@@ -134,7 +134,6 @@
                 <label class="lbl-winner" id="lbl-winner">WINNER WINNER!</label><br />
                 <label class="lbl-winner-name" id="lbl-winner-name">hey</label><br />
                 <label class="lbl-winner-score" id="lbl-winner-score">Sayo na ang Korona!</label><br />
-                <!-- <label class="lbl-winner-scoreValue" id="lbl-winner-scoreValue"></label><br /> -->
                 <button class="btn-winner-yes" id="btn-winner-yes" onclick="restartYes()">Restart</button>
                 <button class="btn-winner-no" id="btn-winner-no" onclick="quitYes()">Quit</button>
             </div>
